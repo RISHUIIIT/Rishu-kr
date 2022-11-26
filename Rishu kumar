@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    map<string, int> unitPrice;
+    map<string, int> gst;
+    map<string, int> quantity;
+
+    unitPrice["Leather wallet"]=1100;
+    unitPrice["Umbrella"]=900;
+    unitPrice["Cigarette"]=200;
+    unitPrice["Honey"]=100;
+
+    gst["Leather wallet"]=18;
+    gst["Umbrella"]=12;
+    gst["Cigarette"]=28;
+    gst["Honey"]=0;
+
+    quantity["Leather wallet"]=1;
+    quantity["Umbrella"]=4;
+    quantity["Cigarette"]=3;
+    quantity["Honey"]=2;
+
+    
+
+    int total=0;
+    float maxgst=0;
+    string product;
+    for(auto p : quantity){
+        int totalunitprice = p.second*(unitPrice[p.first]);
+        int discount=0;
+        if(unitPrice[p.first]>=500) discount=0.05*totalunitprice;
+        totalunitprice-=discount;
+        float gstTax=((float)gst[p.first])/(float)100*(totalunitprice);
+        if(gstTax>maxgst){
+            maxgst=gstTax;
+            product=p.first;
+        }
+        total+=(totalunitprice+gstTax);
+    }
+    cout<<product<<endl;
+    cout<<total<<endl;
+
+}
